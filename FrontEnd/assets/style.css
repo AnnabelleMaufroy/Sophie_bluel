@@ -125,6 +125,25 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+.categories{
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+.categorieButton{
+	font-family: 'Syne';
+	color:#1D6154;
+	background-color: white;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding: 5px 10px 5px 10px;
+}
+.categorieButton:hover{
+	color: white;
+	background-color: #1D6154;
+}
 .gallery {
 	width: 100%;
 	display: grid;
