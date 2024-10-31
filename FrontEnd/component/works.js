@@ -1,9 +1,6 @@
-import { fetchWorks } from "./api.js";
-
-const gallery = document.querySelector('.gallery');
-
-export async function displayWorks() {
-    const works = await fetchWorks();
+export async function displayWorks(container, works) {
+    const containerWork = document.querySelector('.'+container);
+    containerWork.innerHTML = '';
 
     for( let i=0; i<works.length; i++){
         const figure = document.createElement('figure');
@@ -16,9 +13,8 @@ export async function displayWorks() {
 
         figcaption.textContent = work.title;
         
-        
         figure.appendChild(img);
         figure.appendChild(figcaption);
-        gallery.appendChild(figure);
+        containerWork.appendChild(figure);
     }
 }
