@@ -1,10 +1,13 @@
-import { fetchWorks } from "./component/api.js";
-import { displayWorks } from "./component/works.js";
-import { buttonCategories } from "./component/categories.js";
+import { workPage } from "./component/projet.js";
+import { loginPage } from "./component/login.js";
 
 async function init(){
-    const works = await fetchWorks();
-    displayWorks('gallery', works);
-    buttonCategories();
+    workPage();
+    
+    const loginLink = document.querySelector('.login_link');
+    loginLink.addEventListener('click', ()=>{
+        loginPage();
+    });
 }
 init();
+
