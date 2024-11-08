@@ -34,8 +34,7 @@ export async function loginPage(){
         const formData = new FormData(form);
         try {
             const userData = await loginUser(formData);
-            console.log('Connexion réussie', userData);
-
+            console.log('Connexion réussie');
         } catch (error) {
             console.error('Erreur de connexion', error);
         }
