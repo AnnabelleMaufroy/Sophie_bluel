@@ -1,4 +1,5 @@
 import { createForm } from "./form.js";
+import { loginUser } from "./api.js";
 
 export async function loginPage(){
     const main = document.querySelector('main');
@@ -17,6 +18,7 @@ export async function loginPage(){
 
     const button = document.createElement('button');
     button.classList.add('buttonConnect')
+    button.type ='submit';
     button.textContent = 'Se connecter';
     form.appendChild(button);
 
@@ -26,6 +28,16 @@ export async function loginPage(){
     form.appendChild(forgetLink);
     
     main.appendChild(form);
-    
-    
+
+    form.addEventListener('submit', async (event)=>{
+        event.preventDefault();
+        const formData = new FormData(form);
+        try {
+            const userData = await loginUser(formData);
+            console.log('Connexion réussie', userData);
+
+        } catch (error) {
+            console.error('Erreur de connexion', error);
+        }
+    });
 }
