@@ -162,10 +162,16 @@ li:hover {
 .forgetLink{
 	text-decoration: underline;
 }
-.formLogin{
+.sectionForm{
 	display: flex;
 	flex-direction: column;
 	width: 380px;
+	margin: auto;
+}
+.formLogin{
+	width: 380px;
+	display: flex;
+	flex-direction: column;
 }
 .formLogin>#email, .formLogin>#password{
 	margin-bottom: 40px;

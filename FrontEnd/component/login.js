@@ -3,6 +3,8 @@ import { loginUser } from "./api.js";
 
 export async function loginPage(){
     const main = document.querySelector('main');
+    const section = document.createElement('section');
+    section.classList.add('sectionForm');
     main.innerHTML= '';
     const form = document.createElement('form');
     form.classList.add('formLogin');
@@ -10,7 +12,7 @@ export async function loginPage(){
     const title = document.createElement('h2');
     title.classList.add('titleLogin');
     title.textContent='Log In';
-    form.appendChild(title);
+    section.appendChild(title);
 
     
     createForm(form,'email','E-mail');
@@ -21,13 +23,15 @@ export async function loginPage(){
     button.type ='submit';
     button.textContent = 'Se connecter';
     form.appendChild(button);
+    
+    section.appendChild(form);
 
     const forgetLink = document.createElement('a')
     forgetLink.classList.add('forgetLink');
     forgetLink.textContent ='Mot de passe oublié'
-    form.appendChild(forgetLink);
-    
-    main.appendChild(form);
+    section.appendChild(forgetLink);
+
+    main.appendChild(section);
 
     form.addEventListener('submit', async (event)=>{
         event.preventDefault();
