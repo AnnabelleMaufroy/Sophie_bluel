@@ -1,6 +1,7 @@
 import { fetchWorks } from "./api.js";
 import { displayWorks } from "./works.js";
 import { buttonCategories } from "./categories.js";
+import { getToken } from "./token.js";
 
 export async function workPage(){
     const main = document.querySelector('main');
@@ -11,5 +12,7 @@ export async function workPage(){
     
     const works = await fetchWorks();
     displayWorks('gallery', works);
-    buttonCategories();
+    await buttonCategories();
+    getToken();
+
 }

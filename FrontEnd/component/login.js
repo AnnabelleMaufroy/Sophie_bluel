@@ -43,6 +43,7 @@ export async function loginPage() {
         try {
             const userData = await loginUser(dataForm);
             console.log("Connexion réussie", userData);
+            localStorage.setItem("token", userData.token);
             workPage();
         } catch (error) {
             console.error("Erreur de connexion", error.message);
