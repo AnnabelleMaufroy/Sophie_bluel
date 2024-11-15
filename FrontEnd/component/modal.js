@@ -1,4 +1,4 @@
-export function displayModal(errorMessage,modalContentClass){
+export function displayModal(message,modalContentClass){
 
     const modal = document.createElement('div');
     modal.classList.add('modal');
@@ -13,7 +13,7 @@ export function displayModal(errorMessage,modalContentClass){
 
     const content = document.createElement('p');
     content.classList.add('content');
-    content.innerText = errorMessage;
+    content.innerText = message;
 
     modalContent.appendChild(close);
     modalContent.appendChild(content);
