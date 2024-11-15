@@ -1,50 +1,52 @@
 import { createForm } from "./form.js"
 import { loginUser } from "./api.js"
 import { workPage } from "./projet.js"
+import { displayModal } from "./modal.js"
 
 export async function loginPage() {
-    const main = document.querySelector("main")
-    const section = document.createElement("section")
-    section.classList.add("sectionForm")
+    const main = document.querySelector("main");
+    const section = document.createElement("section");
+    section.classList.add("sectionForm");
     main.innerHTML = ""
-    const form = document.createElement("form")
-    form.classList.add("formLogin")
+    const form = document.createElement("form");
+    form.classList.add("formLogin");
 
-    const title = document.createElement("h2")
-    title.classList.add("titleLogin")
-    title.textContent = "Log In"
-    section.appendChild(title)
+    const title = document.createElement("h2");
+    title.classList.add("titleLogin");
+    title.textContent = "Log In";
+    section.appendChild(title);
 
-    createForm(form, "email", "E-mail")
-    createForm(form, "password", "Mot de passe")
+    createForm(form, "email", "E-mail");
+    createForm(form, "password", "Mot de passe");
 
-    const button = document.createElement("button")
-    button.classList.add("buttonConnect")
-    button.type = "submit"
-    button.textContent = "Se connecter"
-    form.appendChild(button)
+    const button = document.createElement("button");
+    button.classList.add("buttonConnect");
+    button.type = "submit";
+    button.textContent = "Se connecter";
+    form.appendChild(button);
 
-    section.appendChild(form)
+    section.appendChild(form);
 
-    const forgetLink = document.createElement("a")
-    forgetLink.classList.add("forgetLink")
-    forgetLink.textContent = "Mot de passe oublié"
-    section.appendChild(forgetLink)
+    const forgetLink = document.createElement("a");
+    forgetLink.classList.add("forgetLink");
+    forgetLink.textContent = "Mot de passe oublié";
+    section.appendChild(forgetLink);
 
-    main.appendChild(section)
+    main.appendChild(section);
 
     form.addEventListener("submit", async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const dataForm = {
             email: form.email.value,
             password: form.password.value,
-        }
+        };
         try {
-            const userData = await loginUser(dataForm)
-            console.log("Connexion réussie", userData)
+            const userData = await loginUser(dataForm);
+            console.log("Connexion réussie", userData);
             workPage();
         } catch (error) {
-            console.error("Erreur de connexion", error)
+            console.error("Erreur de connexion", error.message);
+            displayModal('Email ou mot de passe erroné','modalLogin');
         }
-    })
+    });
 }
