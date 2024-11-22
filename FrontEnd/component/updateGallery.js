@@ -1,4 +1,5 @@
 import { deleteWork } from "./api.js";
+import { displayWorks } from "./works.js";
 
 export function updateGallery(works){
     const worksContainer = document.querySelector('.gallerie-container');
@@ -35,6 +36,11 @@ export function updateGallery(works){
                 });
 
                 updateGallery(updatedWorks);
+                // ici applper la function update work avec updatedWorks
+                displayWorks('gallery', updatedWorks);
+                // metre a jour la modale
+                //  document.querySelector('.content').appendChild(modalGalerie(works))
+
             });
 
             workContainer.appendChild(img);
