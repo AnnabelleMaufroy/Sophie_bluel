@@ -30,7 +30,9 @@ export function updateGallery(works){
             svg.addEventListener('click', async () => {
                 await deleteWork(work.id);
 
-                const updatedWorks = works.filter(w => w.id !== work.id);
+                const updatedWorks = works.filter(function(workFilter) {
+                    return workFilter.id !== work.id;
+                });
 
                 updateGallery(updatedWorks);
             });
