@@ -1,4 +1,8 @@
 export function displayModal(message,modalContentClass){
+    const existingModal = document.querySelector('.modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
 
     const modal = document.createElement('div');
     modal.classList.add('modal');
@@ -22,6 +26,6 @@ export function displayModal(message,modalContentClass){
     document.body.appendChild(modal);
 
     close.addEventListener('click', () => {
-        modal.style.display = "none";
+        modal.remove();
     });
 }

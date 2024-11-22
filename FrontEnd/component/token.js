@@ -1,6 +1,7 @@
 import { displayModal } from "./modal.js";
+import { modalGalerie } from "./modalGalerie.js";
 
-export function getToken(){
+export function getToken(works){
     const token = localStorage.getItem('token');
     const categorieButtons = document.querySelectorAll('.categorieButton');
     if (token) {
@@ -18,8 +19,8 @@ export function getToken(){
         title.appendChild(modification);
         
         modification.addEventListener('click', () => {
-            console.log('Modification des projets');
-            displayModal('test','modalModification');
+            displayModal('Gallerie Photo','modalGallery');
+            document.querySelector('.content').appendChild(modalGalerie(works))
         });
 
     }else {

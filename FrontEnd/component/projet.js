@@ -13,6 +13,6 @@ export async function workPage(){
     const works = await fetchWorks();
     displayWorks('gallery', works);
     await buttonCategories();
-    getToken();
+    getToken(works);
 
 }
