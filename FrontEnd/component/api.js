@@ -33,3 +33,23 @@ export async function loginUser(formData) {
         throw error;
     }
 }
+
+export async function deleteWork(id){
+    try{
+        const response = await fetch(`http://localhost:5678/api/works/${id}`,{
+            method: 'DELETE',
+            headers:{"Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `Erreur lors de la suppression de l'élément avec l'id ${id}`);
+        }
+        return { success: true };
+    }catch (error){
+        console.error(`Erreur dans deleteWork pour l'id ${id}:`, error);
+        return { success: false, error: error.message };
+    }
+
+}

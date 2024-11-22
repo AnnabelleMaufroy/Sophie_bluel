@@ -177,7 +177,7 @@ li:hover {
 	margin-bottom: 40px;
 	height: 50px;
 	border: none;
-	box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);;
+	box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);
 }
 .formLogin>label{
 	margin-bottom: 5px;
@@ -232,7 +232,7 @@ li:hover {
 
 .content {
     margin: 20px 0;
-    font-size: 16px;
+    font-size: 20px;
 }
 .modificationLink{
 	cursor: pointer;
@@ -242,17 +242,99 @@ li:hover {
 	font-weight: normal;
 	margin-left: 20px;
 }
-.modalModification{
+.modalGallery{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: white;
-	width: 300px;
-	height: 50px;
+	width: 470px;
+	height: 550px;
     padding: 20px;
     border-radius: 8px;
     text-align: center;
     position: relative;
 	margin: 0 auto;
-	margin-top: 10px;
+	margin-top: 50px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.gallerie-container{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	margin-top: 30px;
+	margin-bottom: 30px;
+	column-gap: 5px;
+	row-gap : 15px;
+	width: 400px;
+}
+.work-container {
+    position: relative;
+}
+.work-container svg{
+	position: absolute;
+	bottom: 5px;
+	right: 2px;
+}
+.addPhoto{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 400px;
+}
+.classImage{
+	width: 75px;
+	height: auto;
+}
+.fileContainer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	background-color: rgba(232, 241, 246, 1);
+	height: 170px;
+}
+.fileText{
+	font-size: 12px;
+}
+.addPhoto label{
+	text-align: left;
+	font-size: 14px;
+}
+.addPhoto input, .addPhoto select{
+	height: 50px;
+	border: none;
+	box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.2);
+}
+.addPhoto select{
+	width: 100%;
+	background-color: white;
+}
+hr{
+	width: 400px;
+	border: none;
+	border-top: 1px solid rgb(179,179, 179);
+	margin-bottom: 30px;
+}
+.buttonAjoutPhoto{
+	font-family: 'Syne';
+	background-color: #1D6154;
+	color: white;
+	border: none;
+	border-radius: 20px;
+	width: 230px;
+	height: 35px;
+	margin: auto;
+}
+.submitButton{
+	font-family: 'Syne';
+	background-color: rgba(167, 167, 167, 1);
+	color: white;
+	border: none;
+	border-radius: 20px;
+	width: 230px;
+	height: 35px;
+	margin: auto;
 }
 #contact {
 	width: 50%;
