@@ -47,7 +47,11 @@ export async function loginPage() {
             workPage();
         } catch (error) {
             console.error("Erreur de connexion", error.message);
-            displayModal('Email ou mot de passe erroné','modalLogin');
+            displayModal('modalLogin');
+            const modalContent = document.querySelector('.modalLogin');
+            const content = document.createElement('div');
+            content.textContent = 'Utilisateur ou mot de passe erroné';
+            modalContent.appendChild(content);
         }
     });
 }

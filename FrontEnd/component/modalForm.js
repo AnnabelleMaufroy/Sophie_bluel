@@ -1,9 +1,38 @@
-import { fetchCategories } from "./api.js";
+import { fetchCategories, addWork } from "./api.js";
 import { createForm } from "./form.js";
+import { modalGalerie } from "./modalGalerie.js";
 
-export async function modalForm(){
+export async function modalForm(works){
     const divContainer =  document.createElement('div');
     divContainer.classList.add('divContainerForm');
+
+    const arrowSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    arrowSVG.setAttribute("width", "21");
+    arrowSVG.setAttribute("height", "21");
+    arrowSVG.setAttribute("viewBox", "0 0 21 21");
+    arrowSVG.setAttribute("fill", "none");
+    arrowSVG.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    arrowSVG.innerHTML = `
+        <path d="M0.439478 8.94458C-0.146493 9.53055 -0.146493 10.4822 0.439478 11.0681L7.9399 18.5686C8.52587 19.1545 9.47748 19.1545 10.0635 18.5686C10.6494 17.9826 10.6494 17.031 10.0635 16.445L5.11786 11.5041H19.4999C20.3297 11.5041 21 10.8338 21 10.004C21 9.17428 20.3297 8.50393 19.4999 8.50393H5.12255L10.0588 3.56303C10.6447 2.97706 10.6447 2.02545 10.0588 1.43948C9.47279 0.853507 8.52118 0.853507 7.93521 1.43948L0.43479 8.9399L0.439478 8.94458Z" fill="black"/>
+    `;
+    arrowSVG.classList.add('arrowSVG');
+
+    arrowSVG.addEventListener('click', ()=>{
+        const modalContainer = document.querySelector('.modalContent');
+        if (modalContainer) {
+            modalContainer.innerHTML = '';
+            const galerie = modalGalerie(works);
+            modalContainer.appendChild(galerie);
+        }
+    })
+
+    divContainer.appendChild(arrowSVG);
+
+    const title = document.createElement('div');
+    title.textContent = 'Ajout photo';
+    title.classList.add('title');
+    divContainer.appendChild(title);
 
     const formContainer = document.createElement('div');
     formContainer.classList.add('formContainer');
@@ -33,15 +62,20 @@ export async function modalForm(){
     inputFile.name = 'image';
     inputFile.required = true;
     inputFile.classList.add('fileInput');
-    
-    //inputFile.textContent = '+ Ajouter photo';
 
+    const buttonFile = document.createElement('button');
+    buttonFile.textContent = '+ Ajouter photo';
+    buttonFile.classList.add('buttonFile');
+
+    buttonFile.addEventListener('click', () => inputFile.click());
+    
     const fileText = document.createElement('p');
     fileText.textContent ='jpg, png : 4mo max';
     fileText.classList.add('fileText');
-
+    
     fileContainer.appendChild(logoSVG);
     fileContainer.appendChild(inputFile);
+    fileContainer.appendChild(buttonFile);
     fileContainer.appendChild(fileText);
 
     const labelCategories = document.createElement('label');
@@ -56,6 +90,12 @@ export async function modalForm(){
     categorieSelect.name = 'category';
     categorieSelect.required = true;
     categorieSelect.classList.add('categorieSelect');
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    categorieSelect.appendChild(defaultOption);
 
     categories.forEach(category => {
         const option = document.createElement('option');
@@ -83,6 +123,38 @@ export async function modalForm(){
     formContainer.appendChild(form);
     divContainer.appendChild(formContainer);
 
-    return divContainer;
+    form.addEventListener('input',()=>{
+        let checkField = true;
+        form.querySelectorAll('input[required], select[required]').forEach(field => {
+            if (field.value.trim() === '') {
+                checkField = false;
+            }
+        });
+        if (checkField) {
+            submitButton.style.backgroundColor = 'rgba(29, 97, 84, 1)';
+        } else {
+            submitButton.style.backgroundColor = 'rgba(167, 167, 167, 1)';
+        }
+    })
+    
+    form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
 
+        const formData = {
+            title : form.text.value,
+            imageUrl: form.image.files[0],
+            categoryId: form.category.value,
+        };
+        try {
+            const newWork = await addWork(formData);
+            console.log("Nouveau travail ajouté:", newWork);
+
+            form.reset();
+
+        } catch (error) {
+            console.error("Erreur lors de l'ajout du travail:", error);
+        }
+    });
+
+    return divContainer;
 }

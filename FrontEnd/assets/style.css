@@ -125,6 +125,9 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+button{
+	cursor: pointer;
+}
 .categories{
 	display: flex;
 	justify-content: center;
@@ -210,6 +213,9 @@ li:hover {
 }
 
 .modalLogin {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	background-color: white;
 	width: 300px;
 	height: 50px;
@@ -221,7 +227,6 @@ li:hover {
 	margin-top: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 .close {
     position: absolute;
     top: 10px;
@@ -241,6 +246,14 @@ li:hover {
 	font-size: 14px;
 	font-weight: normal;
 	margin-left: 20px;
+}
+.title{
+	font-size: 26px;
+	font-family: 'work Sans';
+}
+.arrowSVG{
+	position: absolute;
+	left: 20px
 }
 .modalGallery{
 	display: flex;
@@ -284,6 +297,20 @@ li:hover {
 .classImage{
 	width: 75px;
 	height: auto;
+}
+.fileInput{
+	opacity: 0;
+	position: absolute;
+	z-index: -1;
+}
+.buttonFile{
+	background-color: rgba(203, 214, 220, 1);
+	color: rgba(48, 102, 133, 1);
+	border: none;
+	width: 170px;
+	height: 35px;
+	border-radius: 50px;
+
 }
 .fileContainer{
 	display: flex;

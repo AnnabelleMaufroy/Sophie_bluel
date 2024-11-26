@@ -8,6 +8,7 @@ export async function createForm(form,type,label){
     newInput.type = type;
     newInput.id = type;
     newInput.name = type;
+    newInput.required = true;
 
     form.appendChild(newLabel);
     form.appendChild(newInput);

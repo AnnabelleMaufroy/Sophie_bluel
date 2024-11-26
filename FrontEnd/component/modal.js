@@ -1,4 +1,4 @@
-export function displayModal(message,modalContentClass){
+export function displayModal(modalContentClass){
     const existingModal = document.querySelector('.modal');
     if (existingModal) {
         existingModal.remove();
@@ -15,12 +15,7 @@ export function displayModal(message,modalContentClass){
     close.classList.add('close');
     close.innerHTML = '&times;';
 
-    const content = document.createElement('p');
-    content.classList.add('content');
-    content.innerText = message;
-
     modalContent.appendChild(close);
-    modalContent.appendChild(content);
     modal.appendChild(modalContent);
 
     document.body.appendChild(modal);
