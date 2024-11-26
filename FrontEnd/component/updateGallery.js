@@ -1,4 +1,6 @@
 import { deleteWork } from "./api.js";
+import { workPage } from "./projet.js";
+import { displayWorks } from "./works.js";
 
 export function updateGallery(works){
     const worksContainer = document.querySelector('.gallerie-container');
@@ -30,9 +32,14 @@ export function updateGallery(works){
             svg.addEventListener('click', async () => {
                 await deleteWork(work.id);
 
-                const updatedWorks = works.filter(w => w.id !== work.id);
+                const updatedWorks = works.filter(function(workFilter) {
+                    return workFilter.id !== work.id;
+                });
 
                 updateGallery(updatedWorks);
+                displayWorks('gallery', updatedWorks);
+                workPage();
+
             });
 
             workContainer.appendChild(img);
