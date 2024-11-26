@@ -28,4 +28,10 @@ export function displayModal(message,modalContentClass){
     close.addEventListener('click', () => {
         modal.remove();
     });
+
+    modal.addEventListener('click', (e)=>{
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
 }

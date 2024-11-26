@@ -1,4 +1,5 @@
 import { deleteWork } from "./api.js";
+import { workPage } from "./projet.js";
 import { displayWorks } from "./works.js";
 
 export function updateGallery(works){
@@ -36,10 +37,8 @@ export function updateGallery(works){
                 });
 
                 updateGallery(updatedWorks);
-                // ici applper la function update work avec updatedWorks
                 displayWorks('gallery', updatedWorks);
-                // metre a jour la modale
-                //  document.querySelector('.content').appendChild(modalGalerie(works))
+                workPage();
 
             });
 
