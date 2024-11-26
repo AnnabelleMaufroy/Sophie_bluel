@@ -21,8 +21,9 @@ export function getToken(works){
         title.appendChild(modification);
         
         modification.addEventListener('click', () => {
-            displayModal('Gallerie Photo','modalGallery');
-            document.querySelector('.content').appendChild(modalGalerie(works))
+            displayModal('modalGallery');
+            const modalGallery = document.querySelector('.modalGallery');
+            modalGallery.appendChild(modalGalerie(works));
         });
 
     }else {

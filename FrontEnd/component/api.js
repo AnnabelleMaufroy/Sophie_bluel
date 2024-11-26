@@ -51,5 +51,31 @@ export async function deleteWork(id){
         console.error(`Erreur dans deleteWork pour l'id ${id}:`, error);
         return { success: false, error: error.message };
     }
+}
 
+export async function addWork(formData){
+    try {
+        const form = new FormData();
+        form.append('image', formData.image);
+        form.append('title', formData.title);
+        form.append('category', formData.categoryId);
+        
+        console.log("Données envoyées :", formData);
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            body: form,
+            headers:{"Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
+        const responseData = await response.json();
+        if (!response.ok) {
+            console.error("Détails de l'erreur : ", responseData);
+            throw new Error(responseData.message || "Erreur lors de l'ajout du travail.");
+        }
+        return responseData;
+    } catch (error) {
+        console.error("Erreur dans addWork:", error);
+        throw error;
+    }
 }

@@ -3,6 +3,12 @@ import { updateGallery } from "./updateGallery.js";
 
 export const modalGalerie = (works)=>{
     const divContainer = document.createElement('div');
+    divContainer.classList.add('modalContent');
+
+    const title = document.createElement('div');
+    title.textContent = 'Galerie photo';
+    title.classList.add('title');
+    divContainer.appendChild(title);
 
     const elementContainer =  document.createElement('div');
     elementContainer.classList.add('gallerie-container');
@@ -17,7 +23,7 @@ export const modalGalerie = (works)=>{
 
     button.addEventListener('click', async ()=>{
         divContainer.innerHTML = '';
-        const form = await modalForm(); 
+        const form = await modalForm(works); 
         divContainer.appendChild(form);
     });
 
