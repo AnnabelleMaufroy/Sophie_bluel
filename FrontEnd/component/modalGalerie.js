@@ -23,15 +23,15 @@ export const modalGalerie = (works)=>{
 
     button.addEventListener('click', async ()=>{
         divContainer.innerHTML = '';
-        const form = await modalForm(works); 
+        const form = await modalForm(); 
         divContainer.appendChild(form);
     });
 
     divContainer.appendChild(hr);
     divContainer.appendChild(button);
 
-    setTimeout(() => {
-        updateGallery(works);
+     setTimeout(() => {
+         updateGallery(works);
     }, 0);
 
     return divContainer;

@@ -1,8 +1,9 @@
-import { fetchCategories, addWork } from "./api.js";
+import { fetchCategories, addWork, fetchWorks } from "./api.js";
 import { createForm } from "./form.js";
 import { modalGalerie } from "./modalGalerie.js";
+import { workPage } from "./projet.js";
 
-export async function modalForm(works){
+export async function modalForm(){
     const divContainer =  document.createElement('div');
     divContainer.classList.add('divContainerForm');
 
@@ -18,11 +19,12 @@ export async function modalForm(works){
     `;
     arrowSVG.classList.add('arrowSVG');
 
-    arrowSVG.addEventListener('click', ()=>{
+    arrowSVG.addEventListener('click', async ()=>{
         const modalContainer = document.querySelector('.modalContent');
         if (modalContainer) {
+            const updatedWorks = await fetchWorks();
             modalContainer.innerHTML = '';
-            const galerie = modalGalerie(works);
+            const galerie = modalGalerie(updatedWorks);
             modalContainer.appendChild(galerie);
         }
     })
@@ -72,6 +74,41 @@ export async function modalForm(works){
     const fileText = document.createElement('p');
     fileText.textContent ='jpg, png : 4mo max';
     fileText.classList.add('fileText');
+
+    const fileError = document.createElement('p');
+    fileError.textContent = 'Le fichier doit être une image au format jpg ou png.';
+    fileError.classList.add('fileError');
+    fileError.style.display = 'none';
+    fileContainer.appendChild(fileError);
+
+    let selectedFile = null;
+    inputFile.addEventListener('change', () => {
+        const file = inputFile.files[0];
+        if (file) {
+            const validTypes = ['image/jpeg', 'image/png'];
+            if (!validTypes.includes(file.type)) {
+                fileError.style.display = 'block';
+                inputFile.value = '';
+                selectedFile = null;
+            } else {
+                fileError.style.display = 'none';
+                selectedFile = file;
+                const imageURL = URL.createObjectURL(file);
+                const img = document.createElement('img');
+                img.src = imageURL;
+                img.classList.add('previewImage');
+
+                fileContainer.appendChild(img);
+                logoSVG.style.display = 'none';
+                inputFile.style.display = 'none';
+                buttonFile.style.display = 'none';
+                fileText.style.display = 'none';
+            }
+        } else {
+            fileError.style.display = 'none';
+            selectedFile = null;
+        }
+    });
     
     fileContainer.appendChild(logoSVG);
     fileContainer.appendChild(inputFile);
@@ -142,18 +179,29 @@ export async function modalForm(works){
 
         const formData = {
             title : form.text.value,
-            imageUrl: form.image.files[0],
+            imageUrl: selectedFile,
             categoryId: form.category.value,
         };
         try {
             const newWork = await addWork(formData);
             console.log("Nouveau travail ajouté:", newWork);
-
             form.reset();
 
+            logoSVG.style.display = 'block';
+            inputFile.style.display = 'block';
+            buttonFile.style.display = 'block';
+            fileText.style.display = 'block';
+            selectedFile = null;
+
+            const img = document.querySelector('.previewImage');
+            if(img){
+                img.remove();
+            }
+            
         } catch (error) {
             console.error("Erreur lors de l'ajout du travail:", error);
         }
+        workPage();
     });
 
     return divContainer;
