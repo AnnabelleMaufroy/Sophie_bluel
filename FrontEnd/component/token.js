@@ -1,6 +1,8 @@
 import { displayModal } from "./modal.js";
 import { modalGalerie } from "./modalGalerie.js";
 
+
+// Après connexion avec token - Modification de la page
 export function getToken(works){
     const token = localStorage.getItem('token');
     const categorieButtons = document.querySelectorAll('.categorieButton');

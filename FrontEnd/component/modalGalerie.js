@@ -1,6 +1,7 @@
 import { modalForm } from "./modalForm.js";
 import { updateGallery } from "./updateGallery.js";
 
+// Mini-gallery
 export const modalGalerie = (works)=>{
     const divContainer = document.createElement('div');
     divContainer.classList.add('modalContent');
@@ -21,6 +22,7 @@ export const modalGalerie = (works)=>{
     button.textContent = 'Ajouter une photo';
     button.classList.add('buttonAjoutPhoto');
 
+    // Affichage modal du formulaire d'ajout
     button.addEventListener('click', async ()=>{
         divContainer.innerHTML = '';
         const form = await modalForm(); 
@@ -30,7 +32,8 @@ export const modalGalerie = (works)=>{
     divContainer.appendChild(hr);
     divContainer.appendChild(button);
 
-     setTimeout(() => {
+    //Apparition de la gallery et mise à jour
+    setTimeout(() => {
          updateGallery(works);
     }, 0);
 

@@ -1,3 +1,4 @@
+//Affichage des works
 export async function displayWorks(container, works) {
     const containerWork = document.querySelector('.'+container);
     containerWork.innerHTML = '';
