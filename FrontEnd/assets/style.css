@@ -312,6 +312,16 @@ button{
 	border-radius: 50px;
 
 }
+.fileError{
+	color: red;
+}
+.previewImage{
+	display: block;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
 .fileContainer{
 	display: flex;
 	flex-direction: column;

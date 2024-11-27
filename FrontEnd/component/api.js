@@ -55,16 +55,16 @@ export async function deleteWork(id){
 
 export async function addWork(formData){
     try {
-        const form = new FormData();
-        form.append('image', formData.image);
-        form.append('title', formData.title);
-        form.append('category', formData.categoryId);
+        const formdata = new FormData();
+        formdata.append('image', formData.imageUrl);
+        formdata.append('title', formData.title);
+        formdata.append('category', formData.categoryId);
         
         console.log("Données envoyées :", formData);
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
-            body: form,
-            headers:{"Content-Type": "application/json",
+            body: formdata,
+            headers:{
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
         });
