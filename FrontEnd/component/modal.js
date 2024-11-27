@@ -1,3 +1,4 @@
+// Création de la modal
 export function displayModal(modalContentClass){
     const existingModal = document.querySelector('.modal');
     if (existingModal) {
@@ -24,6 +25,7 @@ export function displayModal(modalContentClass){
         modal.remove();
     });
 
+    // Ferme la modal clique hors modal
     modal.addEventListener('click', (e)=>{
         if (e.target === modal) {
             modal.remove();

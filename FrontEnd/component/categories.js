@@ -32,10 +32,15 @@ export async function buttonCategories(){
     
     //Event click
     for (let i = 0; i < buttons.length; i++){
-        buttons[i].addEventListener('click', ()=> filterWorks(buttons[i].dataset.categorieId));
+        buttons[i].addEventListener('click', ()=>{
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttons[i].classList.add('active');
+            filterWorks(buttons[i].dataset.categorieId)
+        });
     }
 }
 
+// Filtre des travaux
 async function filterWorks(categoryId) {
     const works = await fetchWorks();
     let filteredWorks;
@@ -51,5 +56,6 @@ async function filterWorks(categoryId) {
             }
         });
     }
+    //Appelle affichage selon filtre
     displayWorks('gallery',filteredWorks);
 }

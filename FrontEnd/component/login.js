@@ -34,6 +34,7 @@ export async function loginPage() {
 
     main.appendChild(section);
 
+    //Soumission du formulaire de connexion
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const dataForm = {

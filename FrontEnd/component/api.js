@@ -60,7 +60,6 @@ export async function addWork(formData){
         formdata.append('title', formData.title);
         formdata.append('category', formData.categoryId);
         
-        console.log("Données envoyées :", formData);
         const response = await fetch("http://localhost:5678/api/works", {
             method: "POST",
             body: formdata,
