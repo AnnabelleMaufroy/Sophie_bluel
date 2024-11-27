@@ -3,7 +3,6 @@ import { createForm } from "./form.js";
 import { modalGalerie } from "./modalGalerie.js";
 import { workPage } from "./projet.js";
 
-// Contenu modal ajout work
 export async function modalForm(){
     const divContainer =  document.createElement('div');
     divContainer.classList.add('divContainerForm');
@@ -20,7 +19,6 @@ export async function modalForm(){
     `;
     arrowSVG.classList.add('arrowSVG');
 
-    // Flèche retour, mise à jour mini-gallery
     arrowSVG.addEventListener('click', async ()=>{
         const modalContainer = document.querySelector('.modalContent');
         if (modalContainer) {
@@ -60,7 +58,6 @@ export async function modalForm(){
 
     logoSVG.classList.add('logoImage');
 
-    //Création de l'input file
     const inputFile = document.createElement('input');
     inputFile.type = 'file';
     inputFile.id = 'image';
@@ -72,7 +69,6 @@ export async function modalForm(){
     buttonFile.textContent = '+ Ajouter photo';
     buttonFile.classList.add('buttonFile');
 
-    //Redirige vers le click de l'inputFile
     buttonFile.addEventListener('click', () => inputFile.click());
     
     const fileText = document.createElement('p');
@@ -85,7 +81,6 @@ export async function modalForm(){
     fileError.style.display = 'none';
     fileContainer.appendChild(fileError);
 
-    // Copie de l'input File / Remplacement du contenu par l'image selectionné
     let selectedFile = null;
     inputFile.addEventListener('change', () => {
         const file = inputFile.files[0];
@@ -139,7 +134,6 @@ export async function modalForm(){
     defaultOption.selected = true;
     categorieSelect.appendChild(defaultOption);
 
-    // Récupération des catégories
     categories.forEach(category => {
         const option = document.createElement('option');
         option.value = category.id;
@@ -166,7 +160,6 @@ export async function modalForm(){
     formContainer.appendChild(form);
     divContainer.appendChild(formContainer);
 
-    // Vérifie que les champs soient tous rempli
     form.addEventListener('input',()=>{
         let checkField = true;
         form.querySelectorAll('input[required], select[required]').forEach(field => {
@@ -181,7 +174,6 @@ export async function modalForm(){
         }
     })
     
-    // Soumission du formulaire
     form.addEventListener('submit', async (e)=>{
         e.preventDefault();
 
@@ -191,8 +183,10 @@ export async function modalForm(){
             categoryId: form.category.value,
         };
         try {
-            // Reset du formulaire
+            const newWork = await addWork(formData);
+            console.log("Nouveau travail ajouté:", newWork);
             form.reset();
+
             logoSVG.style.display = 'block';
             inputFile.style.display = 'block';
             buttonFile.style.display = 'block';
@@ -207,7 +201,6 @@ export async function modalForm(){
         } catch (error) {
             console.error("Erreur lors de l'ajout du travail:", error);
         }
-        //Recharge affichage gallery
         workPage();
     });
 
